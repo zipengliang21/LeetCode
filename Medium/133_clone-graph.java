@@ -18,6 +18,45 @@ class Node {
 }
 */
 
+// bfs
+class Solution {
+    public Node cloneGraph(Node node) {
+        if (node == null) {
+            return node;
+        } 
+        
+        // key: original node //value: clone's node
+        Map<Node, Node> map = new HashMap<>();
+        
+        Queue<Node> queue = new LinkedList<>();
+        queue.offer(node);
+        Node cloneNode = new Node(node.val);
+        map.put(node, cloneNode);
+        
+        while (!queue.isEmpty()) {
+            Node curNode = queue.poll();
+            
+            for (Node neighborNode: curNode.neighbors) {
+                // clone node precondition: neightbor node is not in the map
+                if (!map.containsKey(neighborNode)) {
+                    Node cloneNeighborNode = new Node(neighborNode.val);
+                    map.put(neighborNode, cloneNeighborNode);
+                    queue.offer(neighborNode);
+                }
+                
+                // clone edge regardless whether the node has been visited
+                Node cloneCurNode = map.get(curNode);
+                List<Node> neighborsOfCloneCurNode = cloneCurNode.neighbors;
+                Node cloneNeighborNode = map.get(neighborNode);
+                neighborsOfCloneCurNode.add(cloneNeighborNode);
+            }
+        }
+        
+        return cloneNode;
+    }
+}
+
+// dfs
 class Solution {
     public Node cloneGraph(Node node) {
         if (node == null) {
