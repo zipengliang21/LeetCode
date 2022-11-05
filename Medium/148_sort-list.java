@@ -8,6 +8,48 @@
  * ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
+// quick sort approach
+class Solution {
+    public ListNode sortList(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        int pivotValue = head.val;
+        ListNode node = head.next;
+        // value <=pivotValue
+        ListNode lowNodeDummy = new ListNode(-1);
+        ListNode lowNode = lowNodeDummy;
+
+        // value > pivotValue
+        ListNode highNodeDummy = new ListNode(-1);
+        ListNode highNode = highNodeDummy;
+
+        while (node != null) {
+            if (node.val < pivotValue) {
+                lowNode.next = node;
+                lowNode = lowNode.next;
+            } else {
+                highNode.next = node;
+                highNode = highNode.next;
+            }
+            node = node.next;
+        }
+
+        // connect three part: lowNode, head, highNode
+        lowNode.next = head;
+        head.next = null;
+        highNode.next = null;
+
+        lowNode = sortList(lowNodeDummy.next);
+        highNode = sortList(highNodeDummy.next);
+
+        head.next = highNode;
+
+        return lowNode;
+    }
+}
+
 // merge sort
 class Solution {
     public ListNode sortList(ListNode head) {
