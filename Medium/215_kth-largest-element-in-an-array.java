@@ -1,3 +1,28 @@
+// With heap approach
+class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        if (nums == null || nums.length == 0) {
+            return -1;
+        }
+
+        // max heap
+        Queue<Integer> heap = new PriorityQueue<>((a, b) -> b - a);
+
+        for (int num : nums) {
+            heap.offer(num);
+        }
+
+        // delete the peak elements k - 1 times
+        for (int i = 0; i < k - 1; i++) {
+            heap.poll();
+        }
+
+        // obtain the kth largest element
+        return heap.peek();
+    }
+}
+
+
 class Solution {
     public int findKthLargest(int[] nums, int k) {
         int pivot = nums.length - k + 1;
