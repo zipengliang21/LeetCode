@@ -1,4 +1,59 @@
-// With heap approach
+// With heap sort 
+class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        if (nums == null || nums.length == 0) {
+            return -1;
+        }
+
+        int heapSize = nums.length;
+
+        // build max heap
+        buildMaxHeap(nums);
+
+        // sort the k - 1 largest elements
+        for (int i = nums.length - 1; i >= nums.length - k + 1; i--) {
+            swap(nums, 0, i);
+            heapSize--;
+            maxHeapify(nums, 0 , heapSize);
+        }
+        
+        return nums[0];
+    }
+
+    private void buildMaxHeap(int[] nums) {
+        for (int i = nums.length / 2; i >= 0; i--) {
+            maxHeapify(nums, i, nums.length);
+        }
+    }
+
+    private void maxHeapify(int[] nums, int i, int heapSize) {
+        int l = 2 * i + 1;
+        int r = 2 * i + 2;
+        int largest = i;
+        if (l < heapSize && nums[l] > nums[largest]) {
+            largest = l;
+        } else {
+            largest = i;
+        }
+
+        if (r < heapSize && nums[r] > nums[largest]) {
+            largest = r;
+        }
+
+        if (largest != i) {
+            swap(nums, i , largest);
+            maxHeapify(nums, largest, heapSize);
+        }
+    }
+
+    private void swap(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+}
+
+// With heap java api approach
 class Solution {
     public int findKthLargest(int[] nums, int k) {
         if (nums == null || nums.length == 0) {
