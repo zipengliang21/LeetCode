@@ -42,5 +42,6 @@ class Solution {
     }
     prev = root;
     inorder(root.right);
+    
   }
 }
