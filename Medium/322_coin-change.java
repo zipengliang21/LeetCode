@@ -19,4 +19,5 @@ class Solution {
 
         return dp[amount] == 20000 ? -1 : dp[amount];
     }
+    
 }
