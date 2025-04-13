@@ -10,4 +10,5 @@ class Solution {
         for (String dir : stack) res = "/" + dir + res;
         return res.isEmpty() ? "/" : res;
     }
+    
 }
