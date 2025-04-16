@@ -26,5 +26,6 @@ class Solution {
         }
 
         return dp[(values.length - 1) % 2];
+
     }
 }
