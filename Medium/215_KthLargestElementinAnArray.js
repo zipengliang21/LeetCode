@@ -38,6 +38,7 @@ const findKthLargest = function (nums, k) {
             }
         }
 
+
         delete nums;
 
         if (greater.length === k - 1 ||
