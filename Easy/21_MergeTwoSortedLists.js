@@ -38,4 +38,5 @@ const mergeTwoLists = (l1, l2) => {
     if (l1 !== null) current.next = l1;
     else if (l2 !== null) current.next = l2;
     return head;
+
 };
